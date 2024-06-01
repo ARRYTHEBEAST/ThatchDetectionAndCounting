@@ -5,7 +5,7 @@ from ultralytics import YOLO
 
 # Define paths
 test_image_dir = r'E:\ML\ThatchHouseDetection\pythonProject1\code\test\test_images'
-weights_path = r"C:\Users\arjun\Downloads\best_4.pt"
+weights_path = r"C:\Users\arjun\Downloads\best_2_0.pt"
 
 # Load the model
 model = YOLO(weights_path)
@@ -20,7 +20,10 @@ output_data = []
 # Perform inference and collect counts
 for img_id in tqdm(image_files):
     img_path = os.path.join(test_image_dir, img_id)
-    results = model.predict(source=img_path, conf=0.1, augment=True, half=True, device='cuda:0')
+    results = model.predict(source=img_path, conf=0.6, augment=True, half=True, device='cuda:0')
+
+#conf=0.5 gives result 0.319021739
+#conf=0.6 gives best result 0.314673913
 
     # Initialize class counts
     class_counts = [0, 0, 0]
@@ -29,7 +32,7 @@ for img_id in tqdm(image_files):
     for result in results:
         for box in result.boxes:
             class_id = int(box.cls)
-            if class_id in [0, 1, 2]:
+            if class_id in [1, 2, 3]:
                 class_counts[class_id] += 1
 
     # Create output rows for each class
@@ -44,8 +47,8 @@ for img_id in tqdm(image_files):
 output_df = pd.DataFrame(output_data)
 
 # Save to CSV
-output_df.to_csv('Submission_4.csv', index=False)
-print("Submission file saved as 'Submission_4.csv'")
+output_df.to_csv('Submission_2_0_9.csv', index=False)
+print("Submission file saved as 'Submission_2_0_9.csv'")
 
 # Print the formatted DataFrame
 print(output_df)
