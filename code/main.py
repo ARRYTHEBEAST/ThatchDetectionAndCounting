@@ -5,7 +5,7 @@ from ultralytics import YOLO
 
 # Define paths
 test_image_dir = r'E:\ML\ThatchHouseDetection\pythonProject1\code\test\test_images'
-weights_path = r"C:\Users\arjun\Downloads\best_2_0.pt"
+weights_path = r"C:\Users\arjun\Downloads\best_0.pt"
 
 # Load the model
 model = YOLO(weights_path)
@@ -47,8 +47,8 @@ for img_id in tqdm(image_files):
 output_df = pd.DataFrame(output_data)
 
 # Save to CSV
-output_df.to_csv('Submission_2_0_9.csv', index=False)
-print("Submission file saved as 'Submission_2_0_9.csv'")
+output_df.to_csv('Submission_0_2.csv', index=False)
+print("Submission file saved as 'Submission_0_2.csv'")
 
 # Print the formatted DataFrame
 print(output_df)
